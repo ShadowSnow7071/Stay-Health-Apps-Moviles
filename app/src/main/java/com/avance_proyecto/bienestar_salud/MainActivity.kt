@@ -11,6 +11,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.outlined.ArrowBack
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -73,7 +74,7 @@ fun PantallaCheckin(
     onCambio: (DatosCheckin) -> Unit,
     onEmpezar: () -> Unit
 ) {
-    val fecha = SimpleDateFormat("EEEE d 'de' MMMM, yyyy", Locale("es", "MX"))
+    val fecha = SimpleDateFormat("EEEE d 'de' MMMM, yyyy", Locale.forLanguageTag("es-MX"))
         .format(Calendar.getInstance().time)
         .replaceFirstChar { it.uppercase() }
 
@@ -243,9 +244,9 @@ fun PantallaPanel(
             Column {
                 Text("Hábitos del día", fontWeight = FontWeight.Bold, fontSize = 16.sp)
                 Spacer(Modifier.height(6.dp))
-                HabitoItem(Icons.Outlined.PauseCircle,   "Pausa activa",   estado.pausaHecha,        { onCambioPanel(estado.copy(pausaHecha = it)) })
-                HabitoItem(Icons.Outlined.LocalDrink,    "Hidratación",    estado.hidratacionHecha,   { onCambioPanel(estado.copy(hidratacionHecha = it)) })
-                HabitoItem(Icons.Outlined.Psychology,    "Concentración",  estado.concentracionHecha, { onCambioPanel(estado.copy(concentracionHecha = it)) })
+                HabitoItem(Icons.Outlined.PauseCircle,   "Pausa activa",   estado.pausaHecha)        { onCambioPanel(estado.copy(pausaHecha = it)) }
+                HabitoItem(Icons.Outlined.LocalDrink,    "Hidratación",    estado.hidratacionHecha)   { onCambioPanel(estado.copy(hidratacionHecha = it)) }
+                HabitoItem(Icons.Outlined.Psychology,    "Concentración",  estado.concentracionHecha) { onCambioPanel(estado.copy(concentracionHecha = it)) }
             }
 
             // Tareas pendientes
@@ -280,14 +281,13 @@ fun PantallaPanel(
             shape  = RoundedCornerShape(30.dp),
             border = BorderStroke(1.5.dp, BotonPrincipal)
         ) {
-            Icon(Icons.Outlined.ArrowBack, contentDescription = "Volver", tint = BotonPrincipal, modifier = Modifier.size(18.dp))
+            Icon(Icons.AutoMirrored.Outlined.ArrowBack, contentDescription = "Volver", tint = BotonPrincipal, modifier = Modifier.size(18.dp))
             Spacer(Modifier.width(6.dp))
             Text("Volver al check-in", color = BotonPrincipal, fontWeight = FontWeight.SemiBold)
         }
     } }
 
 // COMPONENTES REUTILIZABLES
-@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun SelectorOpciones(icono: String, titulo: String, opciones: List<String>,
     seleccion: String, onSeleccion: (String) -> Unit

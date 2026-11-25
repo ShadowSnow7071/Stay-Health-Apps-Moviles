@@ -1,4 +1,3 @@
-// ⚠️ Cambia el nombre del paquete al de tu proyecto en Android Studio
 package com.avance_proyecto.bienestar_salud
 
 // Guarda lo que el usuario registra en el check-in diario
